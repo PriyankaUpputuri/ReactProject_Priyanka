@@ -8,8 +8,9 @@ class Home extends Component {
 
                 <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            {<img style={{width: '1340px', height: '570px'}} src="https://veneziaballinasloedotcom.files.wordpress.com/2018/04/home-food-delivery.png?w=1000" alt="..." />}
+                        <div class="carousel-item active my-3 py-4">
+                        <img src="https://previews.123rf.com/images/margouillat/margouillat1711/margouillat171100281/89696277-assorted-indian-food.jpg" class="d-block w-100" alt="..." />
+
                         </div>
                     </div>
                 </div>

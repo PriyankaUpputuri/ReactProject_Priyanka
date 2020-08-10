@@ -18,4 +18,5 @@ class User {
         this.userPincode = ""
     }
 }
+
 export default User 

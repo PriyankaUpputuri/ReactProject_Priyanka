@@ -1,7 +1,8 @@
-import { FETCH_RESTAURANTS, SIGNUP, SIGNIN, FETCH_RESTAURANT_BY_ID, FETCH_MENU_ITEMS_BY_ID } from './types';
+import { FETCH_RESTAURANTS,SIGNUP,SIGNIN,FETCH_RESTAURANT_BY_ID ,FETCH_MENU_ITEMS_BY_ID} from './types';
 import axios from 'axios';
 
 export const fetchRestaurants = () => dispatch => {
+
   axios.get("http://localhost:8082/restaurants/all")
     .then(res => {
       dispatch({
@@ -9,10 +10,10 @@ export const fetchRestaurants = () => dispatch => {
         payload: res.data
       })
     })
-};
-
+}; 
 export const signupData = (signup) => dispatch => {
-  axios.get("http://localhost:8082/user/signup", signup)
+ 
+  axios.get("http://localhost:8082/user/signup",signup)
     .then(user => {
       dispatch({
         type: SIGNUP,
@@ -21,15 +22,16 @@ export const signupData = (signup) => dispatch => {
       console.log(user.data)
     })
 };
-
-export const signinData = (mobile, password) => dispatch => {
+export const signinData = (mobile,password) => dispatch => {
+ 
   axios.request({
-    url: "http://localhost:8082/user/signin",
-    method: "post",
-    auth: {
-      username: mobile,
-      password: password
-    }
+    url:"http://localhost:8082/user/signin",
+  method:"post",
+  auth:{
+    username:mobile,
+    password:password
+  }
+ 
   })
     .then(login => {
       console.log(login.data)
@@ -39,9 +41,9 @@ export const signinData = (mobile, password) => dispatch => {
       })
     })
 };
-
 export const fetchRestaurantById = (restaurantId) => dispatch => {
-  axios.get("http://localhost:8082/restaurants/find/" + restaurantId)
+
+  axios.get("http://localhost:8082/restaurants/find/"+restaurantId)
     .then(res => {
       console.log(res)
       dispatch({
@@ -50,8 +52,8 @@ export const fetchRestaurantById = (restaurantId) => dispatch => {
       })
     })
 };
-
 export const fetchMenuItemsById = (restaurantId) => dispatch => {
+
   axios.get("http://localhost:8082/menu/find/" + restaurantId)
     .then(res => {
       dispatch({

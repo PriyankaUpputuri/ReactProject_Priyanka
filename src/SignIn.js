@@ -7,11 +7,9 @@ class SignIn extends Component {
         super();
         this.user = new User()
         this.state = {
-            user: this.user,
-            disabledFlag: true
+            user: this.user
         }
     }
-
     handleSubmit(event) {
         event.preventDefault();
         axios.request({
@@ -24,20 +22,20 @@ class SignIn extends Component {
         }).then(res => {
             console.log(res.data)
         })
+
         this.user = new User()
+
         this.setState({ user: this.user })
     }
-
-    handleMobileNumberChange(event) {
+    handlephoneNumberChange(event) {
         this.user.userMobile = event.target.value
         this.setState({
             user: this.user,
-            mobileNumberEmptyError: (this.user.userMobile === "") ? true : false,
-            mobileNumberLengthError: (this.user.userMobile.length > 10 || this.user.userMobile.length < 10) ? true : false,
+            phoneNumberEmptyError: (this.user.userMobile === "") ? true : false,
+            phoneNumberError: (this.user.userMobile.length > 10 || this.user.userMobile.length < 10) ? true : false,
             disabledFlag: (this.user.userPassword === "" || this.user.userMobile === "") ? true : false
         })
     }
-
     handlePasswordChange(event) {
         this.user.userPassword = event.target.value
         this.setState({
@@ -49,26 +47,26 @@ class SignIn extends Component {
     }
 
     render() {
-        return (
-            <div className="container">
-                <div className="jumbotron py-2 my-1">
-                    <p className="display-4 text-center mb-0">Sign In Form</p>
-                </div>
 
+        return (
+
+            <div className="container">
+                
                 <form onSubmit={(event) => this.handleSubmit(event)}>
+                
                     <fieldset>
                         <div className="form-group">
-                            <label>User Mobile</label>
-                            <input type="text" className="form-control" placeholder="Enter Mobile Number" value={this.state.user.userMobile} onChange={(event) => this.handleMobileNumberChange(event)} />
+                            <label>Phone Number</label>
+                            <input type="text" className="form-control" placeholder="Enter Phone Number" value={this.state.user.userMobile} onChange={(event) => this.handlephoneNumberChange(event)} />
+
                             {
-                                (this.state.mobileNumberEmptyError) ? 
-                                    <div className="alert alert-danger">
-                                        Mobile Number is required!
-                                    </div> : 
-                                (this.state.mobileNumberLengthError) ?
+                                (this.state.phoneNumberError) ?
                                     <div className="alert alert-danger" role="alert">
-                                        Mobile Number should be 10 digits
-                                    </div> : null                             
+                                        Phone number should be 10 digits
+                        </div> : null
+                            }
+                            {
+                                (this.state.phoneNumberEmptyError) ? <div className="alert alert-danger">Phone Number shouldn't be empty</div> : null
                             }
                         </div>
 
@@ -78,17 +76,20 @@ class SignIn extends Component {
                             {
                                 (this.state.passwordError) ?
                                     <div className="alert alert-danger" role="alert">
-                                        Password is required!
-                                </div> :
-                                    (this.state.lengthError) ?
-                                        <div className="alert alert-danger" role="alert">
-                                            Password should be minimum 6 characters
-                                        </div> : null
+                                        Password can't be empty
+                        </div> : null
                             }
+                            {
+                                (this.state.lengthError) ?
+                                    <div className="alert alert-danger" role="alert">
+                                        Password should be minimum 6 characters
+                         </div> : null
+                            }
+
                         </div>
 
-                        <button type="submit" className="btn btn-info" disabled={this.state.disabledFlag} >Sign In</button>
-                    </fieldset>
+
+                        <button type="submit" className="btn btn-secondary" disabled={this.state.disabledFlag} >SignIn</button>                    </fieldset>
                 </form>
             </div>
         );

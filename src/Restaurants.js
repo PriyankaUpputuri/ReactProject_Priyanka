@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import {
+    NavLink
+} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchRestaurants } from './actions/allActions';
 
@@ -7,6 +9,10 @@ class Restaurants extends Component {
 
     componentDidMount() {
         this.props.fetchRestaurants();
+    }
+
+    constructor() {
+        super()
     }
 
     mapRestaurants() {
@@ -30,6 +36,10 @@ class Restaurants extends Component {
     render() {
         return (
             <div className="container">
+                <div className="jumbotron py-3 my-2">
+                    <p className="display-4 text-center mb-0 text-secondary">Choose Your Favourite Restaurants!!</p>
+                </div>
+
                 <div className="row">
                     {this.mapRestaurants()}
                 </div>
@@ -41,4 +51,5 @@ class Restaurants extends Component {
 const mapStateToProps = state => ({
     reducer: state.reducer.restaurants
 });
+
 export default connect(mapStateToProps, { fetchRestaurants })(Restaurants);

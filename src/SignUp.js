@@ -4,13 +4,12 @@ import axios from 'axios';
 
 class SignUp extends Component {
 
+  
     passwordRef
     confirmPasswordRef
-
     componentDidMount() {
         this.user = new User()
     }
-
     componentDidUpdate() {
         if (this.props.user !== this.state.user && this.props.user !== undefined) {
             this.user = this.props.user
@@ -34,11 +33,10 @@ class SignUp extends Component {
             passwordLengthError: false,
             confirmPasswordError: false,
             mobileLengthError: false,
-            disabledFlag: true,
+            disabledFlag: false,
             displayFlag: true
         }
     }
-
     handleSubmit(event) {
         event.preventDefault();
         if (this.props.user === undefined)
@@ -55,7 +53,6 @@ class SignUp extends Component {
             displayflag: true
         })
     }
-
     handleUserNameChange(event) {
         this.user.userName = event.target.value
         this.setState({
@@ -113,6 +110,7 @@ class SignUp extends Component {
         })
     }
 
+
     handlePincodeChange(event) {
         this.user.userPincode = event.target.value
         this.setState({
@@ -123,40 +121,37 @@ class SignUp extends Component {
     }
 
     signUpSubmit(event) {
+
         console.log("Form Submitted!")
         this.setState({
             displayFlag: false
         })
-        event.preventDefault() 
+        event.preventDefault()
+        
     }
 
     render() {
         return (
             <div className="container">
-                <div className="jumbotron py-2 my-1">
-                    <p className="display-4 text-center mb-0">Sign Up Form</p>
-                </div>
-                
-                <form onSubmit={(event) => this.handleSubmit(event)}>     
+                <form onSubmit={(event) => this.handleSubmit(event)}>
                     <div className="form-group">
-                        <label>Username</label>
+                        <label>UserName</label>
                         <input type="text" className="form-control" placeholder="Enter UserName" value={this.state.user.userName} onChange={(event) => this.handleUserNameChange(event)} />
                         {
                             (this.state.userNameError) ?
                                 <div className="alert alert-danger" role="alert">
                                     UserName is Required!
-                                </div> : null
+                </div> : null
                         }
                     </div>
-
                     <div className="form-group">
                         <label>Email</label>
-                        <input type="text" className="form-control" placeholder="Enter Email Address" value={this.state.user.userEmail} onChange={(event) => this.handleEmailChange(event)} />
+                        <input type="text" className="form-control" placeholder="Enter UserName" value={this.state.user.userEmail} onChange={(event) => this.handleEmailChange(event)} />
                         {
                             (this.state.userEmailError) ?
                                 <div className="alert alert-danger" role="alert">
                                     Email is Required!
-                                </div> : null
+                </div> : null
                         }
                     </div>
 
@@ -167,12 +162,14 @@ class SignUp extends Component {
                             (this.state.passwordError) ?
                                 <div className="alert alert-danger" role="alert">
                                     Password is Required!
-                                </div> : (this.state.passwordLengthError) ?
-                                <div className="alert alert-danger" role="alert">
+                </div> : (this.state.passwordLengthError) ?
+                                    <div className="alert alert-danger" role="alert">
                                         Password Length Should be greter than 6 is Required!
-                                </div> : null
+                </div> : null
                         }
                     </div>
+
+                   
 
                     <div className="form-group">
                         <label>Address</label>
@@ -181,7 +178,7 @@ class SignUp extends Component {
                             (this.state.addressError) ?
                                 <div className="alert alert-danger" role="alert">
                                     Address is Required!
-                                </div> : null
+                </div> : null
                         }
                     </div>
 
@@ -192,26 +189,26 @@ class SignUp extends Component {
                             (this.state.pincodeError) ?
                                 <div className="alert alert-danger" role="alert">
                                     Pincode is Required!
-                                </div> : null
+                </div> : null
                         }
                     </div>
 
                     <div className="form-group">
                         <label>Mobile Number</label>
-                        <input type="text" className="form-control" placeholder="Enter Mobile Number" value={this.state.user.userMobile} onChange={(event) => this.handleMobileChange(event)} />
+                        <input type="text" className="form-control" placeholder="Enter Phone Number" value={this.state.user.userMobile} onChange={(event) => this.handleMobileChange(event)} />
                         {
                             (this.state.mobileError) ?
                                 <div className="alert alert-danger" role="alert">
                                     Mobile Number is Required!
-                                </div> : (this.state.mobileLengthError) ?
-                                <div className="alert alert-danger" role="alert">
-                                    Mobile Number Length Should be 10!
-                                </div> : null
+                </div> : (this.state.mobileLengthError) ?
+                                    <div className="alert alert-danger" role="alert">
+                                        Mobile Number Length Should be 10!
+                </div> : null
                         }
                     </div>
 
                     <div>
-                        <button type="submit" className="btn btn-info" disabled={this.state.disabledFlag}>Sign Up</button>
+                        <button type="submit" className="btn btn-secondary my-3" disabled={this.state.disabledFlag}>SignUp</button>
                     </div>
                 </form>
 
@@ -225,4 +222,5 @@ class SignUp extends Component {
         );
     }
 }
+
 export default SignUp;
